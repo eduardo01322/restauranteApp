@@ -30,9 +30,9 @@ const dados: ItensCardapio[] = [
 
 const renderItem = ({item}: {item: ItensCardapio}) => (
     <TouchableOpacity style={styles.itensCardapio}>
-        <Text>{item.nome}</Text>
-        <Text>R$: {item.preco}</Text>
-        <Text>{item.ingredientes}</Text>
+        <Text style={styles.nameText}>{item.nome}</Text>
+        <Text style={styles.precoText}>R$: {item.preco}</Text>
+        <Text style={styles.itensText}>{item.ingredientes}</Text>
         <Image source={item.image} style={styles.images}/>
     </TouchableOpacity>
 );
@@ -41,6 +41,10 @@ function Cardapio(): React.JSX.Element {
     return (
       <View style={styles.container}>
         <View style={styles.header}>
+            <TouchableOpacity>
+            <Image source={require('./assets/images/logoCerto.png')} 
+            style={styles.Logo}/>
+            </TouchableOpacity>
             <Text style={styles.headerText}>Cardapio</Text>
         </View>
         <FlatList showsVerticalScrollIndicator={false} data={dados} 
@@ -77,18 +81,43 @@ const styles = StyleSheet.create({
         marginVertical: 8,
         marginHorizontal: 16
     },
+    Logo: {
+        height: 100,
+        width: 150
+    },
     images: {
         width: 250,
+        height: 150,
+        marginRight: 'auto',
+        marginTop: 'auto'
     },
     header: {
         backgroundColor: '#dcdcdc',
         alignItems: 'center',
-        paddingVertical: 10
+        paddingVertical: 5
     },
     headerText: {
         fontSize: 20,
         fontWeight: 'bold',
         color: 'black'
+    },
+    nameText: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        color: 'black',
+        marginLeft: 'auto'
+    },
+    itensText: {
+        fontSize: 20,
+        fontWeight: 'normal',
+        color: 'black',
+        marginLeft: 'auto'
+    },
+    precoText: {
+        fontSize: 20,
+        fontWeight: 'normal',
+        color: 'black',
+        marginLeft: 'auto'
     },
     footer: {
         borderTopWidth: 0.2,
