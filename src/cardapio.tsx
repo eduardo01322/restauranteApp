@@ -1,5 +1,5 @@
 import React from "react";
-import {FlatList, Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import {FlatList, Image, ImageBackground, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 interface ItensCardapio {
     id: string;
@@ -48,9 +48,11 @@ function Cardapio(): React.JSX.Element {
             <Image source={require('./assets/images/logoCerto.png')} 
             style={styles.Logo}/>
         </View>
+        <ImageBackground source={require('./assets/images/fundo.jpg')} 
+        style={styles.ImageBackground}/>
         <FlatList showsVerticalScrollIndicator={false} data={dados} 
         renderItem={renderItem} keyExtractor={(item) => item.id}/>
-
+         
         <View style={styles.footer}>
             <TouchableOpacity>
                 <Image source={require('./assets/images/home.png')}
@@ -79,20 +81,24 @@ function Cardapio(): React.JSX.Element {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#525252'
     },
     itensCardapio: {
-        backgroundColor: '#ba2f04',
-        padding: 20,
-        marginVertical: 8,
+        backgroundColor: '#2d5e86',
+        padding: 10,
+        marginVertical: 16,
         marginHorizontal: 16,
         flexDirection: 'column',
-        borderRadius: 20
+        borderRadius: 20,
+    },
+    ImageBackground: {
+        flex: 1,
+        width: 393, 
+        height: 590,
     },
     Logo: {
         height: 100,
         width: 100,
-        marginTop: -15
+        marginTop: -15,
     },
     images: {
         width: 100,
@@ -107,13 +113,13 @@ const styles = StyleSheet.create({
         marginTop: -25
     },
     header: {
-        backgroundColor: '#dcdcdc',
+        backgroundColor: 'white',
         alignItems: 'center',
         height: 100,
         paddingVertical: 5
     },
     headerText: {
-        fontSize: 15,
+        fontSize: 20,
         fontWeight: 'bold',
         color: 'black'
     },
@@ -137,6 +143,7 @@ const styles = StyleSheet.create({
         fontWeight: 'normal',
         color: 'black',
         textAlign: 'center',
+        marginStart: -35
     },
     footer: {
         borderTopWidth: 0.2,
