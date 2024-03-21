@@ -44,11 +44,13 @@ function Cardapio(): React.JSX.Element {
     return (
       <View style={styles.container}>
         <View style={styles.header}>
-        <Text style={styles.headerText}>saveurs du monde</Text>
-            <Image source={require('./assets/images/logoCerto.png')} 
+        <ImageBackground source={require('./assets/images/headerFundo.jpg')} 
+        style={styles.ImageBackgroundHeader}/>
+            <Image source={require('./assets/images/logo.png')} 
             style={styles.Logo}/>
+            <Text style={styles.headerText}>Cardapio</Text>
         </View>
-        <ImageBackground source={require('./assets/images/fundo.jpg')} 
+        <ImageBackground source={require('./assets/images/fundo2.jpg')} 
         style={styles.ImageBackground}/>
         <FlatList showsVerticalScrollIndicator={false} data={dados} 
         renderItem={renderItem} keyExtractor={(item) => item.id}/>
@@ -73,6 +75,12 @@ function Cardapio(): React.JSX.Element {
                 <Image source={require('./assets/images/menu.jpg')}
                 style={styles.footerIcon}/>
             </TouchableOpacity>
+
+            <TouchableOpacity>
+                <Image source={require('./assets/images/cartA.png')}
+                style={styles.footerIcon}/>
+            </TouchableOpacity>
+
         </View>
       </View>
     );
@@ -93,11 +101,19 @@ const styles = StyleSheet.create({
     ImageBackground: {
         flex: 1,
         width: 393, 
-        height: 590,
+        height: 516,
+        marginVertical: -20,
+        marginTop: 100,
+        
+    },
+    ImageBackgroundHeader: {
+        flex: 1,
+        width: 413, 
+        height: 170,
     },
     Logo: {
-        height: 100,
-        width: 100,
+        height: 150,
+        width: 150,
         marginTop: -15,
     },
     images: {
@@ -113,15 +129,15 @@ const styles = StyleSheet.create({
         marginTop: -25
     },
     header: {
-        backgroundColor: 'white',
         alignItems: 'center',
-        height: 100,
-        paddingVertical: 5
+        height: 70,
+        
     },
     headerText: {
         fontSize: 20,
         fontWeight: 'bold',
-        color: 'black'
+        color: '#bdbdbd',
+        marginTop: -20,
     },
     nameText: {
         fontSize: 20,
