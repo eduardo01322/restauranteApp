@@ -32,7 +32,7 @@ const renderItem = ({item}: {item: ItensCarrinho}) => (
         <Text style={styles.itensText}>{item.ingredientes}</Text>
         <Text style={styles.precoText}>R$: {item.preco}</Text>
         <TouchableOpacity> 
-        <Image source={require('./images/lixo.png')} style={styles.cartImage}/>
+        <Image source={require('./images/lixo1.png')} style={styles.cartImage}/>
         </TouchableOpacity>
         </View>
         
