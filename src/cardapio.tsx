@@ -35,7 +35,7 @@ const renderItem = ({item}: {item: ItensCardapio}) => (
         <Text style={styles.itensText}>{item.ingredientes}</Text>
         <Text style={styles.precoText}>R$: {item.preco}</Text>
         <TouchableOpacity>
-        <Image source={require('./assets/images/cart.png')} style={styles.cartImage}/>
+        <Image source={require('./assets/images/Carrinho.png')} style={styles.cartImage}/>
         </TouchableOpacity>
         </View>
 );
@@ -91,7 +91,6 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     itensCardapio: {
-        backgroundColor: '#2d5e86',
         padding: 10,
         marginVertical: 16,
         marginHorizontal: 16,
@@ -126,7 +125,7 @@ const styles = StyleSheet.create({
         width: 45,
         height: 45,
         marginLeft: 280,
-        marginTop: -25
+        marginTop: -25,
     },
     header: {
         alignItems: 'center',
@@ -142,7 +141,7 @@ const styles = StyleSheet.create({
     nameText: {
         fontSize: 20,
         fontWeight: 'bold',
-        color: 'black',
+        color: 'white',
         textAlign: 'left',
         marginStart: 110,
         marginTop: -105
@@ -150,14 +149,14 @@ const styles = StyleSheet.create({
     itensText: {
         fontSize: 15,
         fontWeight: '500',
-        color: 'black',
+        color: 'white',
         textAlign: 'left',
         marginStart: 110
     },
     precoText: {
         fontSize: 20,
         fontWeight: 'normal',
-        color: 'black',
+        color: 'white',
         textAlign: 'center',
         marginStart: -35
     },
