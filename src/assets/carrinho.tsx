@@ -25,7 +25,10 @@ const dados: ItensCarrinho[] = [
 ];
 
 
+
+
 function Carrinho(): React.JSX.Element {
+    
     const [count, setCount] = useState(9)
 const renderItem = ({item}: {item: ItensCarrinho}) => (
         <View style={styles.itensCardapio}>
@@ -55,6 +58,9 @@ const renderItem = ({item}: {item: ItensCarrinho}) => (
         <FlatList showsVerticalScrollIndicator={false} data={dados} 
         renderItem={renderItem} keyExtractor={(item) => item.id}/>
          
+         <View>
+            
+         </View>
         <View style={styles.footer}>
             <TouchableOpacity>
                 <Image source={require('./images/home.png')}
