@@ -29,23 +29,24 @@ const dados: ItensCardapio[] = [
 ];
 
 const renderItem = ({item}: {item: ItensCardapio}) => (
-    <TouchableOpacity style={styles.itensCardapio}>
-        <Text style={styles.nameText}>{item.nome}</Text>
-        <Text style={styles.precoText}>R$: {item.preco}</Text>
-        <Text style={styles.itensText}>{item.ingredientes}</Text>
+        <View style={styles.itensCardapio}>
         <Image source={item.image} style={styles.images}/>
-    </TouchableOpacity>
+        <Text style={styles.nameText}>{item.nome}</Text>
+        <Text style={styles.itensText}>{item.ingredientes}</Text>
+        <Text style={styles.precoText}>R$: {item.preco}</Text>
+        <TouchableOpacity>
+        <Image source={require('./assets/images/cart.png')} style={styles.cartImage}/>
+        </TouchableOpacity>
+        </View>
 );
 
 function Cardapio(): React.JSX.Element {
     return (
       <View style={styles.container}>
         <View style={styles.header}>
-            <TouchableOpacity>
+        <Text style={styles.headerText}>saveurs du monde</Text>
             <Image source={require('./assets/images/logoCerto.png')} 
             style={styles.Logo}/>
-            </TouchableOpacity>
-            <Text style={styles.headerText}>Cardapio</Text>
         </View>
         <FlatList showsVerticalScrollIndicator={false} data={dados} 
         renderItem={renderItem} keyExtractor={(item) => item.id}/>
@@ -65,6 +66,11 @@ function Cardapio(): React.JSX.Element {
                 <Image source={require('./assets/images/profile.png')}
                 style={styles.footerIcon}/>
             </TouchableOpacity>
+
+            <TouchableOpacity>
+                <Image source={require('./assets/images/menu.jpg')}
+                style={styles.footerIcon}/>
+            </TouchableOpacity>
         </View>
       </View>
     );
@@ -73,31 +79,41 @@ function Cardapio(): React.JSX.Element {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#808080'
+        backgroundColor: '#525252'
     },
     itensCardapio: {
-        backgroundColor: '#ffe4c4',
+        backgroundColor: '#ba2f04',
         padding: 20,
         marginVertical: 8,
-        marginHorizontal: 16
+        marginHorizontal: 16,
+        flexDirection: 'column',
+        borderRadius: 20
     },
     Logo: {
         height: 100,
-        width: 150
+        width: 100,
+        marginTop: -15
     },
     images: {
-        width: 250,
-        height: 150,
+        width: 100,
+        height: 100,
         marginRight: 'auto',
-        marginTop: 'auto'
+        borderRadius: 20
+    },
+    cartImage: {
+        width: 45,
+        height: 45,
+        marginLeft: 280,
+        marginTop: -25
     },
     header: {
         backgroundColor: '#dcdcdc',
         alignItems: 'center',
+        height: 100,
         paddingVertical: 5
     },
     headerText: {
-        fontSize: 20,
+        fontSize: 15,
         fontWeight: 'bold',
         color: 'black'
     },
@@ -105,19 +121,22 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: 'bold',
         color: 'black',
-        marginLeft: 'auto'
+        textAlign: 'left',
+        marginStart: 110,
+        marginTop: -105
     },
     itensText: {
-        fontSize: 20,
-        fontWeight: 'normal',
+        fontSize: 15,
+        fontWeight: '500',
         color: 'black',
-        marginLeft: 'auto'
+        textAlign: 'left',
+        marginStart: 110
     },
     precoText: {
         fontSize: 20,
         fontWeight: 'normal',
         color: 'black',
-        marginLeft: 'auto'
+        textAlign: 'center',
     },
     footer: {
         borderTopWidth: 0.2,
