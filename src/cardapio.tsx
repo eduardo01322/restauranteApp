@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import {FlatList, Image, ImageBackground, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+
 
 interface ItensCardapio {
     id: string;
@@ -8,6 +9,7 @@ interface ItensCardapio {
     ingredientes: string;
     image: any;
 }
+
 
 const dados: ItensCardapio[] = [
     {id: "1", nome: "Salada de frutos do mar", preco: "100.00", ingredientes: "Salada com frutos do mar, como camarão, lula e polvo, servida com molho vinagrete.", image: require('./assets/images/SaladaDeFrutosDoMar.jpg')},
@@ -27,21 +29,24 @@ const dados: ItensCardapio[] = [
     {id: "15", nome: "Costelinha de porco na panela de pressão", preco: "27.00", ingredientes: "Feita com costelinha de porco, cebola, alho e molho de tomate, é cozida na panela de pressão", image: require('./assets/images/CostelinhaDePorcoNaPanelaDePressão.jpg')},
 
 ];
-
+function Cardapio(): React.JSX.Element {
+    const [count, setCount] = useState(0)
 const renderItem = ({item}: {item: ItensCardapio}) => (
         <View style={styles.itensCardapio}>
         <Image source={item.image} style={styles.images}/>
         <Text style={styles.nameText}>{item.nome}</Text>
         <Text style={styles.itensText}>{item.ingredientes}</Text>
         <Text style={styles.precoText}>R$: {item.preco}</Text>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => setCount(count + 1)}> 
         <Image source={require('./assets/images/Carrinho.png')} style={styles.cartImage}/>
         </TouchableOpacity>
         </View>
+        
 );
 
-function Cardapio(): React.JSX.Element {
+
     return (
+        
       <View style={styles.container}>
         <View style={styles.header}>
         <ImageBackground source={require('./assets/images/headerFundo.jpg')} 
@@ -76,15 +81,16 @@ function Cardapio(): React.JSX.Element {
                 style={styles.footerIcon}/>
             </TouchableOpacity>
 
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => setCount(count * 0)}>
                 <Image source={require('./assets/images/cartA.png')}
                 style={styles.footerIcon}/>
             </TouchableOpacity>
-
+            <Text style={styles.countText}>{count}</Text> 
         </View>
       </View>
     );
 }
+
 
 const styles = StyleSheet.create({
     container: {
@@ -146,6 +152,18 @@ const styles = StyleSheet.create({
         marginStart: 110,
         marginTop: -105
     },
+    countText: {
+        backgroundColor: 'black',
+        fontSize: 20,
+        fontWeight: 'bold',
+        color: 'white',
+        textAlign: 'center',
+        left: 15,
+        width: 30,
+        height: 30,
+        borderRadius: 100,
+        
+    },
     itensText: {
         fontSize: 15,
         fontWeight: '500',
@@ -169,6 +187,7 @@ const styles = StyleSheet.create({
         paddingVertical: 10
     },
     footerIcon: {
+        left: 30,
         width: 30,
         height: 30
     }
