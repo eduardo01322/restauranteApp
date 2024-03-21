@@ -5,8 +5,7 @@ import Example from "./src/cardapio";
 function App(): React.JSX.Element {
 
   return (
-    //<Cardapio/>
-    <Example/>
+    <Cardapio/>
   );
 }
 
