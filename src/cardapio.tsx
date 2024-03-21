@@ -154,15 +154,15 @@ const styles = StyleSheet.create({
     },
     countText: {
         backgroundColor: 'black',
-        fontSize: 20,
+        fontSize: 10,
         fontWeight: 'bold',
         color: 'white',
         textAlign: 'center',
-        left: 15,
-        width: 30,
-        height: 30,
+        left: -13,
+        width: 15,
+        height: 15,
         borderRadius: 100,
-        
+        marginTop: -20        
     },
     itensText: {
         fontSize: 15,
