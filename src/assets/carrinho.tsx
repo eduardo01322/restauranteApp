@@ -25,20 +25,21 @@ const dados: ItensCarrinho[] = [
 ];
 
 
+function Carrinho(): React.JSX.Element {
+    const [count, setCount] = useState(9)
 const renderItem = ({item}: {item: ItensCarrinho}) => (
         <View style={styles.itensCardapio}>
         <Image source={item.image} style={styles.images}/>
         <Text style={styles.nameText}>{item.nome}</Text>
         <Text style={styles.itensText}>{item.ingredientes}</Text>
         <Text style={styles.precoText}>R$: {item.preco}</Text>
-        <TouchableOpacity> 
+        <TouchableOpacity onPress={() => setCount(count - 1)}> 
         <Image source={require('./images/lixo1.png')} style={styles.cartImage}/>
         </TouchableOpacity>
         </View>
         
 );
 
-function Carrinho(): React.JSX.Element {
     return (
         
       <View style={styles.container}>
@@ -79,6 +80,7 @@ function Carrinho(): React.JSX.Element {
                 <Image source={require('./images/cartA.png')}
                 style={styles.footerIcon}/>
             </TouchableOpacity>
+            <Text style={styles.countText}>{count}</Text>
              
         </View>
       </View>
