@@ -154,15 +154,15 @@ const styles = StyleSheet.create({
     },
     countText: {
         backgroundColor: 'black',
-        fontSize: 10,
+        fontSize: 14,
         fontWeight: 'bold',
         color: 'white',
         textAlign: 'center',
-        left: -13,
-        width: 15,
-        height: 15,
+        left: -23,
+        width: 17,
+        height: 17,
         borderRadius: 100,
-        marginTop: -20        
+        marginTop: -23        
     },
     itensText: {
         fontSize: 15,
@@ -182,7 +182,7 @@ const styles = StyleSheet.create({
         borderTopWidth: 0.2,
         backgroundColor: 'white',
         flexDirection: 'row',
-        justifyContent: 'space-around',
+        justifyContent: 'space-between',
         alignItems: 'center',
         paddingVertical: 21
     },

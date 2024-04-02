@@ -5,8 +5,8 @@ import Carrinho from "./src/carrinho";
 function App(): React.JSX.Element {
 
   return (
-    //<Cardapio/>
-    <Carrinho/>
+    <Cardapio/>
+    //<Carrinho/>
   );
 }
 

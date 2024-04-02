@@ -35,13 +35,25 @@ const renderItem = ({item}: {item: ItensCarrinho}) => (
         <Text style={styles.nameText}>{item.nome}</Text>
         <Text style={styles.itensText}>{item.ingredientes}</Text>
         <Text style={styles.precoText}>R$: {item.preco}</Text>
-        <TouchableOpacity onPress={() => setCount(count - 1)}> 
-        <Image source={require('./assets/images/lixo1.png')} style={styles.cartImage}/>
+        <TouchableOpacity onPress={() => setCount(count - 1 )}> 
+        <Image source={require('./assets/images/lixo1.png')} style={styles.lixoImage}/>
         </TouchableOpacity>
         </View>
         
 );
-
+const radius = () => (
+    <View>
+        <Text style={styles.pagamento}>Forma de pagamento:</Text>
+        <View style={styles.RadioButton}>
+         <RadioButton
+        value="Pix"
+        status={ checked === 'first' ? 'checked' : 'unchecked' }
+        onPress={() => setChecked('first')} />
+        <Text style={styles.textRadioButton}>PIX</Text>
+        </View>
+    </View>
+    
+);
     return (
         
       <View style={styles.container}>
@@ -54,10 +66,11 @@ const renderItem = ({item}: {item: ItensCarrinho}) => (
         </View>
         <ImageBackground source={require('./assets/images/fundo2.jpg')} 
         style={styles.ImageBackground}/>
+        
         <FlatList showsVerticalScrollIndicator={false} data={dados} 
-        renderItem={renderItem} keyExtractor={(item) => item.id}/>
+        renderItem={renderItem} keyExtractor={(item) => item.id} 
+        /> 
          
-
         <Text style={styles.pagamento}>Forma de pagamento:</Text>
          <View style={styles.RadioButton}>
          <RadioButton
@@ -82,6 +95,7 @@ const renderItem = ({item}: {item: ItensCarrinho}) => (
         onPress={() => setChecked('third')} />
         <Text style={styles.textRadioButton}>Dinheiro Fisico</Text>
          </View> 
+
          
         <View style={styles.footer}>
             <TouchableOpacity>
@@ -151,7 +165,7 @@ const styles = StyleSheet.create({
         marginRight: 'auto',
         borderRadius: 20
     },
-    cartImage: {
+    lixoImage: {
         width: 45,
         height: 45,
         marginLeft: 280,
@@ -178,15 +192,15 @@ const styles = StyleSheet.create({
     },
     countText: {
         backgroundColor: 'black',
-        fontSize: 10,
+        fontSize: 14,
         fontWeight: 'bold',
         color: 'white',
         textAlign: 'center',
-        left: -13,
-        width: 15,
-        height: 15,
+        left: -23,
+        width: 17,
+        height: 17,
         borderRadius: 100,
-        marginTop: -20        
+        marginTop: -23        
     },
     itensText: {
         fontSize: 15,
@@ -206,7 +220,7 @@ const styles = StyleSheet.create({
         borderTopWidth: 0.2,
         backgroundColor: 'white',
         flexDirection: 'row',
-        justifyContent: 'space-around',
+        justifyContent: 'space-between',
         alignItems: 'center',
         paddingVertical: 21
     },
@@ -217,11 +231,13 @@ const styles = StyleSheet.create({
     },
     RadioButton: {
         flexDirection: 'row',
+    
     },
     textRadioButton: {
         color: 'white',
         width: 70,
-        marginTop: 5
+        marginTop: 5,
+        fontSize: 15
     },
     pagamento: {
         color: 'white',
