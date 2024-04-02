@@ -41,19 +41,6 @@ const renderItem = ({item}: {item: ItensCarrinho}) => (
         </View>
         
 );
-const radius = () => (
-    <View>
-        <Text style={styles.pagamento}>Forma de pagamento:</Text>
-        <View style={styles.RadioButton}>
-         <RadioButton
-        value="Pix"
-        status={ checked === 'first' ? 'checked' : 'unchecked' }
-        onPress={() => setChecked('first')} />
-        <Text style={styles.textRadioButton}>PIX</Text>
-        </View>
-    </View>
-    
-);
     return (
         
       <View style={styles.container}>
