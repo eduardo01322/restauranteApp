@@ -80,10 +80,12 @@ const CadastroCliente: React.FC = () => {
 
     return (
         <View style={styles.container}>
-            <StatusBar backgroundColor="red" barStyle="light-content"/>
+            <StatusBar backgroundColor="black" barStyle="light-content"/>
             <View style={styles.header}>
                 <Text style={styles.headerText}>Cadastro Cliente</Text>
             </View>
+            <Image source={require('../assets/imagesCadastro/perfil.png')}
+            style={styles.Logo}/>
             <View style={styles.form}>
             <View style={styles.alinhamentoFotoSelecionada}>
                     {foto ? <Image source={{ uri: foto }} style={styles.fotoSelecionada} /> : null}
@@ -175,7 +177,14 @@ const CadastroCliente: React.FC = () => {
         buttonText: {
             color: 'white',
             fontWeight: 'bold'
-        }
+        },
+        Logo: {
+            width: 150,
+            height: 150,
+            resizeMode: 'cover',
+            borderRadius: 200,
+            marginBottom: 20,
+        },
     });
 
 export default CadastroCliente;
