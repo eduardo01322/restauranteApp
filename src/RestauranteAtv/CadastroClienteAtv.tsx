@@ -82,7 +82,7 @@ const Cliente: React.FC = () => {
 
     return (
         <View style={styles.container}>
-
+            <ScrollView>
             <View style={styles.header}>
             <ImageBackground source={require('../assets/images/headerFundo.jpg')} 
         style={styles.ImageBackgroundHeader}/>
@@ -139,6 +139,7 @@ const Cliente: React.FC = () => {
                     <Text style={styles.buttonText}>Cadastrar cliente</Text>
                 </TouchableOpacity>
             </ImageBackground>
+            </ScrollView>
         </View>
     );
 }
@@ -155,7 +156,7 @@ const Cliente: React.FC = () => {
         ImageBackground: {
             flex: 1,
             width: 393, 
-            height: 700,
+            height: 750,
             marginVertical: -20,
             marginTop: 150,
         },
