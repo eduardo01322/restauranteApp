@@ -3,6 +3,9 @@ import Cardapio from "./src/cardapio";
 import Carrinho from "./src/carrinho";
 import CadastroProduto from "./src/screens/CadastroProduto";
 import CadastroCliente from "./src/screens/LoginClientes";
+import Produto from "./src/RestauranteAtv/CadastroProdutoAtv";
+import Cliente from "./src/RestauranteAtv/CadastroClienteAtv";
+import CardapioAtv from "./src/RestauranteAtv/CardapioAtv";
 
 function App(): React.JSX.Element {
 
@@ -10,7 +13,11 @@ function App(): React.JSX.Element {
     //<Cardapio/>
     //<Carrinho/>
     //<CadastroProduto/>
-    <CadastroCliente/>
+    //<CadastroCliente/>
+
+    <Produto/>
+    //<Cliente/>
+    //<CardapioAtv/>
   );
 }
 
