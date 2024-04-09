@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Image, StatusBar, StyleSheet, TouchableOpacity, View } from "react-native";
+import { Image, ImageBackground, StatusBar, StyleSheet, TouchableOpacity, View } from "react-native";
 import { launchCamera, launchImageLibrary } from "react-native-image-picker";
 import { Text, TextInput } from "react-native-paper";
 import axios from "axios";
@@ -76,83 +76,108 @@ const Produto: React.FC = () => {
 
     return (
         <View style={styles.container}>
-            <StatusBar backgroundColor="red" barStyle="light-content"/>
             <View style={styles.header}>
+            <ImageBackground source={require('../assets/images/headerFundo.jpg')} 
+        style={styles.ImageBackgroundHeader}/>
             <Image source={require('../assets/images/logo.png')} 
             style={styles.Logo}/>
                 <Text style={styles.headerText}>Cadastrar Produto</Text>
             </View>
+            <ImageBackground source={require('../assets/images/fundo2.jpg')} 
+            style={styles.ImageBackground}>
+
              <View style={styles.alinhamentoImagemSelecionada}>
-             <Image source={require('../assets/images/foodIcon.png')}
-            style={styles.icon}/>
+             <TouchableOpacity onPress={abrirCamera}>
+             <Image source={require('../assets/images/foodIcon.png')} style={styles.icon}/>
                     {imagem ? <Image source={{ uri: imagem }} style={styles.imagemSelecionada} /> : null}
-                </View>
-            <View style={styles.form}>
-                <TextInput style={styles.input} placeholder="nome do produto"
-                value={nome} onChangeText={setNome}/>
-
-                <TextInput style={styles.input} placeholder="Preço"
-                value={preco} onChangeText={setPreco}/>
-
-                <TextInput style={styles.input} placeholder="ingredientes"
-                value={ingredientes} onChangeText={setIngredientes} multiline/>
-
-                <TouchableOpacity style={styles.imageButton} onPress={selecionarImagem}>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.imageButton} onPress={selecionarImagem}>
                     <Text style={styles.imageButtonText}>selecionar imagem</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.imageButton} onPress={abrirCamera}>
-                    <Text style={styles.imageButtonText}>Tirar foto</Text>
-                </TouchableOpacity>
+                </View>
+
+                <View style={styles.input}>
+                <TextInput  style={styles.input2} placeholder="nome do produto"
+                value={nome} onChangeText={setNome}/>  
+                </View>
+
+                <View style={styles.input}>
+                <TextInput style={styles.input2} placeholder="Preço"
+                value={preco} onChangeText={setPreco}/>
+                </View>
+                <View style={styles.input}>
+                <TextInput style={styles.input2} placeholder="ingredientes"
+                value={ingredientes} onChangeText={setIngredientes}/>
+                </View>
+                
                 <TouchableOpacity style={styles.button} onPress={cadastrarProduto}>
                     <Text style={styles.buttonText}>Cadastrar Produto</Text>
                 </TouchableOpacity>
-            </View>
-
+                
+            </ImageBackground>
         </View>
     );
 }
     const styles = StyleSheet.create({
         container: {
-            flex: 1
+            flex: 1,
+        },
+        ImageBackground: {
+            flex: 1,
+            width: 393, 
+            height: 700,
+            marginVertical: -20,
+            marginTop: 150,
+            
+        },
+        ImageBackgroundHeader: {
+            flex: 1,
+            width: 413, 
+            height: 300,
+            marginTop: -30
         },
         header: {
-            backgroundColor: 'grey0',
-            paddingVertical: 10,
-            alignItems: 'center'
+            alignItems: 'center',
+            height: 8,
         },
         headerText: {
             fontSize: 20,
             fontWeight: 'bold',
             color: 'white',
+            marginTop: -20,
         },
         Logo: {
             height: 100,
             width: 100,
-            marginTop: -15,
-        },
-        form: {
-            padding: 10,
-            backgroundColor: '#f0f0f0',
-            marginBottom: 10
+            marginTop: 20,
         },
         input: {
+            backgroundColor: "white",
             height: 40,
-            borderColor: 'gray',
-            borderWidth: 1,
+            paddingVertical: 10,
+            marginBottom: 10,
+            paddingHorizontal: 4,
+            borderRadius: 20,
+        },
+        input2: {
+            backgroundColor: "white",
+            height: 30,
             marginBottom: 10,
             paddingHorizontal: 10,
-            borderRadius: 10
+            borderRadius: 20,
+            marginTop: -3
         },
         imageButton: {
-            backgroundColor: 'red',
             padding: 10,
             borderRadius: 5,
             alignItems: 'center',
             marginBottom: 10,
+            marginTop: -20
         },
         imageButtonText: {
             color: 'white',
-            fontWeight: 'bold'
+            fontWeight: 'bold',
+            fontSize: 15,
         },
         imagemSelecionada: {
             marginTop: -115,
@@ -168,7 +193,7 @@ const Produto: React.FC = () => {
         button: {
             backgroundColor: 'red',
             padding: 10,
-            borderRadius: 5,
+            borderRadius: 20,
             alignItems: 'center'
         },
         buttonText: {
@@ -176,12 +201,12 @@ const Produto: React.FC = () => {
             fontWeight: 'bold'
         },
         icon: {
-            marginTop: 20,
+            marginTop: -30,
             width: 100,
             height: 100,
             alignItems: 'center',
             resizeMode: 'cover',
-            borderRadius: 200,
+            borderRadius: 40,
             marginBottom: 20,
         },
     });

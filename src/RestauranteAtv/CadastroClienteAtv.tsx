@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Image, ScrollView, StatusBar, StyleSheet, TouchableOpacity, View } from "react-native";
+import { Image, ImageBackground, ScrollView, StatusBar, StyleSheet, TouchableOpacity, View } from "react-native";
 import { launchCamera, launchImageLibrary } from "react-native-image-picker";
 import { Text, TextInput } from "react-native-paper";
 import axios from "axios";
@@ -82,48 +82,63 @@ const Cliente: React.FC = () => {
 
     return (
         <View style={styles.container}>
-            <ScrollView>
-            <StatusBar backgroundColor="black" barStyle="light-content"/>
+
             <View style={styles.header}>
+            <ImageBackground source={require('../assets/images/headerFundo.jpg')} 
+        style={styles.ImageBackgroundHeader}/>
+            <Image source={require('../assets/images/logo.png')} 
+            style={styles.Logo}/>
                 <Text style={styles.headerText}>Cadastro Cliente</Text>
             </View>
-            <View style={styles.form}>
+
+            <ImageBackground source={require('../assets/images/fundo2.jpg')} 
+            style={styles.ImageBackground}>
 
             <View style={styles.alinhamentoFotoSelecionada}>
-            <Image source={require('../assets/imagesCadastro/perfil.png')}
+            <TouchableOpacity style={styles.fotoButton} onPress={abrirCamera}>
+            <Image source={require('../assets/images/userAdd.png')}
             style={styles.icon}/>
                     {foto ? <Image source={{ uri: foto }} style={styles.fotoSelecionada} /> : null} 
-                </View>
-
-                <TextInput style={styles.input} placeholder="nome"
-                value={nome} onChangeText={setNome}/>
-
-                <TextInput style={styles.input} placeholder="telefone"
-                value={telefone} onChangeText={setTelefone}/>
-
-                <TextInput style={styles.input} placeholder="endereco"
-                value={endereco} onChangeText={setEndereco} />
-
-                <TextInput style={styles.input} placeholder="email"
-                value={email} onChangeText={setEmail} />
-
-                <TextInput style={styles.input} placeholder="cpf"
-                value={cpf} onChangeText={setCpf} />
-
-                <TextInput style={styles.input} placeholder="senha"
-                value={password} onChangeText={setPassword} />
-
-                <TouchableOpacity style={styles.fotoButton} onPress={selecionarImagem}>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.fotoButton} onPress={selecionarImagem}>
                     <Text style={styles.fotoButtonText}>selecionar imagem</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.fotoButton} onPress={abrirCamera}>
-                    <Text style={styles.fotoButtonText}>Tirar foto</Text>
-                </TouchableOpacity>
+            </View>
+
+            <View style={styles.input}>
+                <TextInput style={styles.input2} placeholder="nome"
+                value={nome} onChangeText={setNome}/>
+                </View>
+
+                <View style={styles.input}>
+                <TextInput style={styles.input2} placeholder="telefone"
+                value={telefone} onChangeText={setTelefone}/>
+                </View>
+                
+                <View style={styles.input}>
+                <TextInput style={styles.input2} placeholder="endereco"
+                value={endereco} onChangeText={setEndereco} />
+                </View>
+                
+                <View style={styles.input}>
+                <TextInput style={styles.input2} placeholder="email"
+                value={email} onChangeText={setEmail} />
+                </View>
+                
+                <View style={styles.input}>
+                <TextInput style={styles.input2} placeholder="cpf"
+                value={cpf} onChangeText={setCpf} />
+                </View>
+
+                <View style={styles.input}>
+                <TextInput style={styles.input2} placeholder="senha"
+                value={password} onChangeText={setPassword} />
+                </View>
+
                 <TouchableOpacity style={styles.button} onPress={cadastrarCliente}>
                     <Text style={styles.buttonText}>Cadastrar cliente</Text>
                 </TouchableOpacity>
-            </View>
-            </ScrollView>
+            </ImageBackground>
         </View>
     );
 }
@@ -131,55 +146,74 @@ const Cliente: React.FC = () => {
         container: {
             flex: 1
         },
+        ImageBackgroundHeader: {
+            flex: 1,
+            width: 413, 
+            height: 300,
+            marginTop: -30
+        },
+        ImageBackground: {
+            flex: 1,
+            width: 393, 
+            height: 700,
+            marginVertical: -20,
+            marginTop: 150,
+        },
+        Logo: {
+            height: 100,
+            width: 100,
+            marginTop: 20,
+        },
         header: {
-            backgroundColor: 'red',
-            paddingVertical: 10,
-            alignItems: 'center'
+            alignItems: 'center',
+            height: 10,
         },
         headerText: {
             fontSize: 20,
             fontWeight: 'bold',
             color: 'white',
-        },
-        form: {
-            padding: 10,
-            backgroundColor: '#f0f0f0',
-            marginBottom: 10
+            marginTop: -15
         },
         input: {
+            backgroundColor: "white",
             height: 40,
-            borderColor: 'gray',
-            borderWidth: 1,
+            paddingVertical: 10,
+            marginBottom: 15,
+            paddingHorizontal: 4,
+            borderRadius: 20,
+            marginTop: 5
+        },
+        input2: {
+            backgroundColor: "white",
+            height: 30,
             marginBottom: 10,
             paddingHorizontal: 10,
-            borderRadius: 10
+            borderRadius: 20,
+            marginTop: -1
         },
         fotoButton: {
-            backgroundColor: 'red',
-            padding: 10,
-            borderRadius: 5,
             alignItems: 'center',
-            marginBottom: 10
+            marginTop: -30,
         },
         fotoButtonText: {
             color: 'white',
             fontWeight: 'bold'
         },
         fotoSelecionada: {
-            marginTop: -150,
-            width: 100,
-            height: 100,
-            resizeMode: 'cover',
+            marginTop: -158,
+            width: 115,
+            height: 115,
             borderRadius: 200,
-            marginBottom: 20,
+            marginBottom: 30,
         },
         alinhamentoFotoSelecionada: {
             alignItems: 'center',
+            marginBottom: 15
         },
         button: {
             backgroundColor: 'red',
             padding: 10,
-            borderRadius: 5,
+            borderRadius: 20,
             alignItems: 'center'
         },
         buttonText: {
@@ -187,8 +221,8 @@ const Cliente: React.FC = () => {
             fontWeight: 'bold'
         },
         icon: {
-            width: 150,
-            height: 150,
+            width: 140,
+            height: 140,
             alignItems: 'center',
             resizeMode: 'cover',
             borderRadius: 200,

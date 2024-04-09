@@ -15,8 +15,9 @@ function App(): React.JSX.Element {
     //<CadastroProduto/>
     //<CadastroCliente/>
 
-    <Produto/>
-    //<Cliente/>
+    //atividade 9/04/24
+    //<Produto/>
+    <Cliente/>
     //<CardapioAtv/>
   );
 }
