@@ -13,14 +13,7 @@ const Cliente: React.FC = () => {
     const [cpf, setCpf] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [foto, setFoto] = useState<any>('');
-    const [nomeErro, setNomeErro] = useState<string>('');
-    const [telefoneErro, setTelefoneErro] = useState<string>('');
-    const [enderecoErro, setEnderecoErro] = useState<string>('');
-    const [emailErro, setEmailErro] = useState<string>('');
-    const [cpfErro, setCpfErro] = useState<string>('');
-    const [passwordErro, setPasswordErro] = useState<string>('');
-    const [fotoErro, setFotoErro] = useState<any>('');
-    const[erro, setErro]=useState<any>({});
+    const[errors, setErrors]=useState<any>({});
 
     const cadastrarCliente = async () => {
         try{
@@ -42,7 +35,7 @@ const Cliente: React.FC = () => {
         });
     }  catch (error) {
             if (error.response && error.response.data && error.response.data.errors) {
-                setErro(error.response.data.errors);
+                setErrors(error.response.data.errors);
             } else {
                 console.log(error);
             }
@@ -50,9 +43,9 @@ const Cliente: React.FC = () => {
     }
 
     const renderError = (name: string) => {
-        if (erro[name]) {
+        if (errors[name]) {
             return (
-                <Text style={styles.textError}>{erro[name][0]}</Text>
+                <Text style={styles.textError}>{errors[name][0]}</Text>
             );
         }
         return null;
@@ -120,10 +113,13 @@ const Cliente: React.FC = () => {
             <Image source={require('../assets/images/userAdd.png')}
             style={styles.icon}/>
                     {foto ? <Image source={{ uri: foto }} style={styles.fotoSelecionada} /> : null} 
+
             </TouchableOpacity>
+            {renderError('foto')}
             <TouchableOpacity style={styles.fotoButton} onPress={selecionarImagem}>
                     <Text style={styles.fotoButtonText}>selecionar imagem</Text>
                 </TouchableOpacity>
+                {renderError('foto')}
             </View>
 
             <View style={styles.input}>
