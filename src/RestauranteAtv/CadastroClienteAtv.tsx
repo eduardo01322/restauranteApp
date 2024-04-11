@@ -52,7 +52,7 @@ const Cliente: React.FC = () => {
     const renderError = (name: string) => {
         if (erro[name]) {
             return (
-                <Text>{erro[name][0]}</Text>
+                <Text style={styles.textError}>{erro[name][0]}</Text>
             );
         }
         return null;
@@ -128,32 +128,38 @@ const Cliente: React.FC = () => {
 
             <View style={styles.input}>
                 <TextInput style={styles.input2} placeholder="nome"
-                value={nome} onChangeText={setNome}/> {renderError('nome')}
+                value={nome} onChangeText={setNome}/> 
+                {renderError('nome')}
                 </View>
 
                 <View style={styles.input}>
                 <TextInput style={styles.input2} placeholder="telefone"
-                value={telefone} onChangeText={setTelefone}/> {renderError('telefone')}
+                value={telefone} onChangeText={setTelefone}/> 
+                {renderError('telefone')}
                 </View>
                 
                 <View style={styles.input}>
                 <TextInput style={styles.input2} placeholder="endereco"
-                value={endereco} onChangeText={setEndereco} /> {renderError('endereco')}
+                value={endereco} onChangeText={setEndereco} /> 
+                {renderError('endereco')}
                 </View>
                 
                 <View style={styles.input}>
                 <TextInput style={styles.input2} placeholder="email"
-                value={email} onChangeText={setEmail} /> {renderError('email')}
+                value={email} onChangeText={setEmail} /> 
+                {renderError('email')}
                 </View>
                 
                 <View style={styles.input}>
                 <TextInput style={styles.input2} placeholder="cpf"
-                value={cpf} onChangeText={setCpf} /> {renderError('cpf')}
+                value={cpf} onChangeText={setCpf} /> 
+                {renderError('cpf')}
                 </View>
 
                 <View style={styles.input}>
                 <TextInput style={styles.input2} placeholder="senha"
-                value={password} onChangeText={setPassword} /> {renderError('password')}
+                value={password} onChangeText={setPassword} /> 
+                {renderError('password')}
                 </View>
 
                 <TouchableOpacity style={styles.button} onPress={cadastrarCliente}>
@@ -249,6 +255,12 @@ const Cliente: React.FC = () => {
             resizeMode: 'cover',
             borderRadius: 200,
             marginBottom: 20,
+        },
+        textError: {
+            color: 'red',
+            marginLeft: 15,
+            marginVertical: 10,
+            fontSize: 15,
         },
     });
 
