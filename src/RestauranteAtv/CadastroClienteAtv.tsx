@@ -5,7 +5,7 @@ import { Text, TextInput } from "react-native-paper";
 import axios from "axios";
 
 const Cliente: React.FC = () => {
-    const [clientes, setClientes] = useState<Cliente[]>([]);
+    const [clientes, setClientes] = useState<ClienteAtv[]>([]);
     const [nome, setNome] = useState<string>('');
     const [telefone, setTelefone] = useState<string>('');
     const [endereco, setEndereco] = useState<string>('');
@@ -13,6 +13,14 @@ const Cliente: React.FC = () => {
     const [cpf, setCpf] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [foto, setFoto] = useState<any>('');
+    const [nomeErro, setNomeErro] = useState<string>('');
+    const [telefoneErro, setTelefoneErro] = useState<string>('');
+    const [enderecoErro, setEnderecoErro] = useState<string>('');
+    const [emailErro, setEmailErro] = useState<string>('');
+    const [cpfErro, setCpfErro] = useState<string>('');
+    const [passwordErro, setPasswordErro] = useState<string>('');
+    const [fotoErro, setFotoErro] = useState<any>('');
+    const[erro, setErro]=useState<any>({});
 
     const cadastrarCliente = async () => {
         try{
@@ -32,9 +40,22 @@ const Cliente: React.FC = () => {
                 'Content-Type': 'multipart/form-data'
             }            
         });
-    } catch(error) {
-        console.log(error);
+    }  catch (error) {
+            if (error.response && error.response.data && error.response.data.errors) {
+                setErro(error.response.data.errors);
+            } else {
+                console.log(error);
+            }
+        }
     }
+
+    const renderError = (name: string) => {
+        if (erro[name]) {
+            return (
+                <Text>{erro[name][0]}</Text>
+            );
+        }
+        return null;
     }
 
     const abrirCamera = () => {
@@ -107,32 +128,32 @@ const Cliente: React.FC = () => {
 
             <View style={styles.input}>
                 <TextInput style={styles.input2} placeholder="nome"
-                value={nome} onChangeText={setNome}/>
+                value={nome} onChangeText={setNome}/> {renderError('nome')}
                 </View>
 
                 <View style={styles.input}>
                 <TextInput style={styles.input2} placeholder="telefone"
-                value={telefone} onChangeText={setTelefone}/>
+                value={telefone} onChangeText={setTelefone}/> {renderError('telefone')}
                 </View>
                 
                 <View style={styles.input}>
                 <TextInput style={styles.input2} placeholder="endereco"
-                value={endereco} onChangeText={setEndereco} />
+                value={endereco} onChangeText={setEndereco} /> {renderError('endereco')}
                 </View>
                 
                 <View style={styles.input}>
                 <TextInput style={styles.input2} placeholder="email"
-                value={email} onChangeText={setEmail} />
+                value={email} onChangeText={setEmail} /> {renderError('email')}
                 </View>
                 
                 <View style={styles.input}>
                 <TextInput style={styles.input2} placeholder="cpf"
-                value={cpf} onChangeText={setCpf} />
+                value={cpf} onChangeText={setCpf} /> {renderError('cpf')}
                 </View>
 
                 <View style={styles.input}>
                 <TextInput style={styles.input2} placeholder="senha"
-                value={password} onChangeText={setPassword} />
+                value={password} onChangeText={setPassword} /> {renderError('password')}
                 </View>
 
                 <TouchableOpacity style={styles.button} onPress={cadastrarCliente}>
