@@ -15,10 +15,10 @@ function App(): React.JSX.Element {
     //<CadastroProduto/>
     //<CadastroCliente/>
 
-    //atividade 9/04/24
+    //atividade 9/04/24:
     //<Produto/>
-    <Cliente/>
-    //<CardapioAtv/>
+    //<Cliente/>
+    <CardapioAtv/>
   );
 }
 

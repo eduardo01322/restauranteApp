@@ -2,27 +2,19 @@ import React, { useState } from "react";
 import {FlatList, Image, ImageBackground, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 
-interface Itens {
-    id: string;
-    nome: string;
-    preco: string;
-    ingredientes: string;
-    image: any;
-}
 
-
-const dados: Itens[] = [
-    {id: "1", nome: "𝓢𝓪𝓵𝓪𝓭𝓪 𝓭𝓮 𝓯𝓻𝓾𝓽𝓸𝓼 𝓭𝓸 𝓶𝓪𝓻", preco: "100.00", ingredientes: "Salada com frutos do mar, como camarão, lula e polvo, servida com molho vinagrete.", image: require('../assets/images/SaladaDeFrutosDoMar.jpg')},
-    {id: "2", nome: "𝓑𝓲𝓯𝓮 𝓪𝓸 𝓶𝓸𝓵𝓱𝓸 𝓭𝓮 𝓿𝓲𝓷𝓱𝓸", preco: "69.50", ingredientes: "Bife grelhado servido com um molho de vinho tinto encorpado, acompanhado de legumes grelhados.", image: require('../assets/images/BifeaAoMolhoDeVinho.jpg')},
-    {id: "3", nome: "𝓜𝓪𝓬𝓪𝓻𝓻ã𝓸 à 𝓬𝓪𝓻𝓫𝓸𝓷𝓪𝓻𝓪", preco: "24.99", ingredientes: "Macarrão servido com molho à base de creme de leite, queijo parmesão, bacon e ovos, finalizado com pimenta preta moída.", image: require('../assets/images/MacarrãoÀCarbonara.jpg')},
-    {id: "4", nome: "𝓡𝓲𝓼𝓸𝓽𝓸 𝓭𝓮 𝓬𝓸𝓰𝓾𝓶𝓮𝓵𝓸𝓼", preco: "20.00", ingredientes: "Risoto cremoso feito com cogumelos frescos, vinho branco, caldo de legumes e finalizado com queijo parmesão ralado.", image: require('../assets/images/RisotoDeCogumelos.jpg')},
-    {id: "5", nome: "𝓒𝓾𝓻𝓻𝔂 𝓭𝓮 𝓵𝓮𝓰𝓾𝓶𝓮𝓼", preco: "19.99", ingredientes: "Curry de legumes com abóbora, batata, cenoura e ervilha, servido com arroz branco e pão naan.", image: require('../assets/images/CurryDeLegumes.jpg')},
-    {id: "6", nome: "𝓠𝓾𝓲𝓬𝓱𝓮 𝓭𝓮 𝓮𝓼𝓹𝓲𝓷𝓪𝓯𝓻𝓮 𝓬𝓸𝓶 𝓺𝓾𝓮𝓲𝓳𝓸 𝓯𝓮𝓽𝓪", preco: "10.00", ingredientes: "Quiche salgada feita com massa crocante e recheada com espinafre, queijo feta e ovos, servida com salada.", image: require('../assets/images/QuicheDeEspinafreComQueijoFeta.jpg')},
-    {id: "7", nome: "𝓕𝓲𝓵é 𝓶𝓲𝓰𝓷𝓸𝓷 𝓰𝓻𝓮𝓵𝓱𝓪𝓭𝓸 𝓬𝓸𝓶 𝓫𝓪𝓽𝓪𝓽𝓪𝓼 𝓯𝓻𝓲𝓽𝓪𝓼", preco: "25.00", ingredientes: "Bife de filé mignon grelhado no ponto desejado, servido com batatas fritas crocantes e molho chimichurri.", image: require('../assets/images/FiléMignonGrelhadoComBatatasFritas.jpg')}
+const dados: Produtos[] = [
+    {id: 1, nome: "𝓢𝓪𝓵𝓪𝓭𝓪 𝓭𝓮 𝓯𝓻𝓾𝓽𝓸𝓼 𝓭𝓸 𝓶𝓪𝓻", preco: "100.00", ingredientes: "Salada com frutos do mar, como camarão, lula e polvo, servida com molho vinagrete.", image: require('../assets/images/SaladaDeFrutosDoMar.jpg')},
+    {id: 2, nome: "𝓑𝓲𝓯𝓮 𝓪𝓸 𝓶𝓸𝓵𝓱𝓸 𝓭𝓮 𝓿𝓲𝓷𝓱𝓸", preco: "69.50", ingredientes: "Bife grelhado servido com um molho de vinho tinto encorpado, acompanhado de legumes grelhados.", image: require('../assets/images/BifeaAoMolhoDeVinho.jpg')},
+    {id: 3, nome: "𝓜𝓪𝓬𝓪𝓻𝓻ã𝓸 à 𝓬𝓪𝓻𝓫𝓸𝓷𝓪𝓻𝓪", preco: "24.99", ingredientes: "Macarrão servido com molho à base de creme de leite, queijo parmesão, bacon e ovos, finalizado com pimenta preta moída.", image: require('../assets/images/MacarrãoÀCarbonara.jpg')},
+    {id: 4, nome: "𝓡𝓲𝓼𝓸𝓽𝓸 𝓭𝓮 𝓬𝓸𝓰𝓾𝓶𝓮𝓵𝓸𝓼", preco: "20.00", ingredientes: "Risoto cremoso feito com cogumelos frescos, vinho branco, caldo de legumes e finalizado com queijo parmesão ralado.", image: require('../assets/images/RisotoDeCogumelos.jpg')},
+    {id: 5, nome: "𝓒𝓾𝓻𝓻𝔂 𝓭𝓮 𝓵𝓮𝓰𝓾𝓶𝓮𝓼", preco: "19.99", ingredientes: "Curry de legumes com abóbora, batata, cenoura e ervilha, servido com arroz branco e pão naan.", image: require('../assets/images/CurryDeLegumes.jpg')},
+    {id: 6, nome: "𝓠𝓾𝓲𝓬𝓱𝓮 𝓭𝓮 𝓮𝓼𝓹𝓲𝓷𝓪𝓯𝓻𝓮 𝓬𝓸𝓶 𝓺𝓾𝓮𝓲𝓳𝓸 𝓯𝓮𝓽𝓪", preco: "10.00", ingredientes: "Quiche salgada feita com massa crocante e recheada com espinafre, queijo feta e ovos, servida com salada.", image: require('../assets/images/QuicheDeEspinafreComQueijoFeta.jpg')},
+    {id: 7, nome: "𝓕𝓲𝓵é 𝓶𝓲𝓰𝓷𝓸𝓷 𝓰𝓻𝓮𝓵𝓱𝓪𝓭𝓸 𝓬𝓸𝓶 𝓫𝓪𝓽𝓪𝓽𝓪𝓼 𝓯𝓻𝓲𝓽𝓪𝓼", preco: "25.00", ingredientes: "Bife de filé mignon grelhado no ponto desejado, servido com batatas fritas crocantes e molho chimichurri.", image: require('../assets/images/FiléMignonGrelhadoComBatatasFritas.jpg')}
 ];
 function CardapioAtv(): React.JSX.Element {
     const [count, setCount] = useState(0)
-const renderItem = ({item}: {item: Itens}) => (
+const renderItem = ({item}: {item: Produtos}) => (
         <View style={styles.itensCardapio}>
         <Image source={item.image} style={styles.images}/>
         <Text style={styles.nameText}>{item.nome}</Text>
@@ -49,7 +41,7 @@ const renderItem = ({item}: {item: Itens}) => (
         <ImageBackground source={require('../assets/images/fundo2.jpg')} 
         style={styles.ImageBackground}/>
         <FlatList showsVerticalScrollIndicator={false} data={dados} 
-        renderItem={renderItem} keyExtractor={(item) => item.id}/>
+        renderItem={renderItem} />
          
         <View style={styles.footer}>
             <TouchableOpacity>

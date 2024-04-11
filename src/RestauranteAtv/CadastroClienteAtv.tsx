@@ -13,7 +13,7 @@ const Cliente: React.FC = () => {
     const [cpf, setCpf] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [foto, setFoto] = useState<any>('');
-    const[errors, setErrors]=useState<any>({});
+    const[errors, setErrors]=useState<any>("");
 
     const cadastrarCliente = async () => {
         try{
