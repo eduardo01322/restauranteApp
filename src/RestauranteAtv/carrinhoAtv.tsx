@@ -1,46 +1,27 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {FlatList, Image, ImageBackground, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { RadioButton } from "react-native-paper";
 
 
 
-function CardapioAtv(): React.JSX.Element {
-    const [produto, setProduto] = useState<Produtos[]>([]);
-    const [erro, setErro] = useState<string>("");
-    const [count, setCount] = useState(0)
-    useEffect(() => {
-        async function fetchData() {
-            try {
-                const response = await axios.get('http://10.137.11.213:8000/api/produtos/listagem');
-              
-                if(true === response.data.status){
-                    setProduto(response.data.data)
-                }
-            } catch (error) {
-                setErro("Ocorreu um erro");
-                console.log(error);
-            }
-        }
-    
-        fetchData();
-    }, []);
-        
+
+function Carrinho(): React.JSX.Element {
+    const [pedido, setPedido] = useState<Pedido[]>([]);
+    const [checked, setChecked] = React.useState('first');
+    const [count, setCount] = useState(9)
+
 const renderItem = ({item}: {item: Produtos}) => (
         <View style={styles.itensCardapio}>
-        <View>
-        <Image source={require('../assets/images/NoImage.png')} style={styles.NoImages}/>
         <Image source={item.image} style={styles.images}/>
-        </View>
         <Text style={styles.nameText}>{item.nome}</Text>
         <Text style={styles.itensText}>{item.ingredientes}</Text>
         <Text style={styles.precoText}>R$: {item.preco}</Text>
-        <TouchableOpacity onPress={() => setCount(count + 1)}> 
-        <Image source={require('../assets/images/Carrinho.png')} style={styles.cartImage}/>
+        <TouchableOpacity onPress={() => setCount(count - 1 )}> 
+        <Image source={require('../assets/images/lixo1.png')} style={styles.lixoImage}/>
         </TouchableOpacity>
         </View>
-
+        
 );
-
     return (
         
       <View style={styles.container}>
@@ -49,13 +30,40 @@ const renderItem = ({item}: {item: Produtos}) => (
         style={styles.ImageBackgroundHeader}/>
             <Image source={require('../assets/images/logo.png')} 
             style={styles.Logo}/>
-            <Text style={styles.headerText}>Cardapio</Text>
+            <Text style={styles.headerText}>Carrinho</Text>
         </View>
         <ImageBackground source={require('../assets/images/fundo2.jpg')} 
         style={styles.ImageBackground}/>
-        <FlatList showsVerticalScrollIndicator={false} data={produto} 
-        renderItem={renderItem}/>
         
+        <FlatList showsVerticalScrollIndicator={false}   data={pedido} 
+        renderItem={renderItem}/> 
+         
+        <Text style={styles.pagamento}>Forma de pagamento:</Text>
+         <View style={styles.RadioButton}>
+         <RadioButton
+        value="Pix"
+        status={ checked === 'first' ? 'checked' : 'unchecked' }
+        onPress={() => setChecked('first')} />
+        <Text style={styles.textRadioButton}>PIX</Text>
+        </View>
+
+        <View style={styles.RadioButton}>
+        <RadioButton
+        value="Cartao"
+        status={ checked === 'second' ? 'checked' : 'unchecked' }
+        onPress={() => setChecked('second')} />
+        <Text style={styles.textRadioButton}>Cartao</Text>
+        </View> 
+    
+        <View style={styles.RadioButton}>
+        <RadioButton
+        value="dinheiro fisico"
+        status={ checked === 'third' ? 'checked' : 'unchecked' }
+        onPress={() => setChecked('third')} />
+        <Text style={styles.textRadioButton}>Dinheiro Fisico</Text>
+         </View> 
+
+         
         <View style={styles.footer}>
             <TouchableOpacity>
                 <Image source={require('../assets/images/home.png')}
@@ -77,11 +85,12 @@ const renderItem = ({item}: {item: Produtos}) => (
                 style={styles.footerIcon}/>
             </TouchableOpacity>
 
-            <TouchableOpacity onPress={() => setCount(count * 0)}>
+            <TouchableOpacity >
                 <Image source={require('../assets/images/cartA.png')}
                 style={styles.footerIcon}/>
             </TouchableOpacity>
-            <Text style={styles.countText}>{count}</Text> 
+            <Text style={styles.countText}>{count}</Text>
+             
         </View>
       </View>
     );
@@ -98,7 +107,6 @@ const styles = StyleSheet.create({
         marginHorizontal: 16,
         flexDirection: 'column',
         borderRadius: 20,
-        marginTop: -60
     },
     ImageBackground: {
         flex: 1,
@@ -124,15 +132,7 @@ const styles = StyleSheet.create({
         marginRight: 'auto',
         borderRadius: 20
     },
-    NoImages: {
-        width: 100,
-        height: 100,
-        marginRight: 10,
-        borderRadius: 20,
-        resizeMode: 'cover',
-        top: 80
-    },
-    cartImage: {
+    lixoImage: {
         width: 45,
         height: 45,
         marginLeft: 280,
@@ -195,7 +195,22 @@ const styles = StyleSheet.create({
         left: 30,
         width: 30,
         height: 30
+    },
+    RadioButton: {
+        flexDirection: 'row',
+    
+    },
+    textRadioButton: {
+        color: 'white',
+        width: 70,
+        marginTop: 5,
+        fontSize: 15
+    },
+    pagamento: {
+        color: 'white',
+        fontSize: 20,
+        marginTop: 10
     }
 })
 
-export default CardapioAtv;
+export default Carrinho;
