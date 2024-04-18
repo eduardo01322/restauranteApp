@@ -1,13 +1,29 @@
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import {FlatList, Image, ImageBackground, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 
 
-const dados: Produtos[] = [
-   
-];
 function CardapioAtv(): React.JSX.Element {
+    const [produto, setProduto] = useState<Produtos[]>([]);
+    const [erro, setErro] = useState<string>("");
     const [count, setCount] = useState(0)
+    useEffect(() => {
+        async function fetchData() {
+            try {
+                const response = await axios.get('http://10.137.11.213:8000/api/produtos/listagem');
+                setProduto(response.data);
+    
+                console.log(produto)
+            } catch (error) {
+                setErro("Ocorreu um erro");
+                console.log(error);
+            }
+        }
+    
+        fetchData();
+    }, []);
+        
 const renderItem = ({item}: {item: Produtos}) => (
         <View style={styles.itensCardapio}>
         <Image source={item.image} style={styles.images}/>
@@ -18,10 +34,8 @@ const renderItem = ({item}: {item: Produtos}) => (
         <Image source={require('../assets/images/Carrinho.png')} style={styles.cartImage}/>
         </TouchableOpacity>
         </View>
-        
+
 );
-
-
     return (
         
       <View style={styles.container}>
@@ -34,9 +48,9 @@ const renderItem = ({item}: {item: Produtos}) => (
         </View>
         <ImageBackground source={require('../assets/images/fundo2.jpg')} 
         style={styles.ImageBackground}/>
-        <FlatList showsVerticalScrollIndicator={false} data={dados} 
-        renderItem={renderItem} />
-         
+        <FlatList showsVerticalScrollIndicator={false} data={produto} 
+        renderItem={renderItem} keyExtractor={(item) => item.id}/>
+        
         <View style={styles.footer}>
             <TouchableOpacity>
                 <Image source={require('../assets/images/home.png')}
