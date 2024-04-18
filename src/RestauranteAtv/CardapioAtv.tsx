@@ -40,6 +40,7 @@ const renderItem = ({item}: {item: Produtos}) => (
         </View>
 
 );
+
     return (
         
       <View style={styles.container}>
@@ -97,6 +98,7 @@ const styles = StyleSheet.create({
         marginHorizontal: 16,
         flexDirection: 'column',
         borderRadius: 20,
+        marginTop: -60
     },
     ImageBackground: {
         flex: 1,
