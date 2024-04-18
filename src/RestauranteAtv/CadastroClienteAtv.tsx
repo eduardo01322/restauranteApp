@@ -11,11 +11,43 @@ const Cliente: React.FC = () => {
     const [endereco, setEndereco] = useState<string>('');
     const [email, setEmail] = useState<string>('');
     const [cpf, setCpf] = useState<string>('');
+    const [cpfError, setCpfError] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [foto, setFoto] = useState<any>('');
-    const[errors, setErrors]=useState<any>("");
+    const [errors, setErrors] = useState<any>({});
 
+
+
+    const validateForm = () => {
+        const newErrors: any = {};
+        if (!nome) {
+            newErrors.nome = "O campo nome é obrigatório";
+          }
+          if (!email) {
+            newErrors.email = "O campo email é obrigatório";
+          }
+          if (!endereco) {
+            newErrors.endereco = "O campo endereço é obrigatório";
+          }
+          if (!telefone) {
+            newErrors.telefone = "O campo telefone é obrigatório";
+          }
+          if (!password) {
+            newErrors.password = "O campo senha é obrigatório";
+          }
+          if (!cpf) {
+            newErrors.cpf = "O campo CPF é obrigatório";
+          }
+          if (!foto) {
+            newErrors.foto = "selecione uma imagem";
+          }
+      
+          setErrors(newErrors);
+      
+          return !Object.keys(newErrors).length;
+    };
     const cadastrarCliente = async () => {
+        if (validateForm()) {
         try{
         const formData = new FormData();
         formData.append('nome', nome);
@@ -31,25 +63,28 @@ const Cliente: React.FC = () => {
         const response = await axios.post('http://10.137.11.213:8000/api/clientes/restaurante', formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
-            }            
+            },            
         });
-    }  catch (error) {
-            if (error.response && error.response.data && error.response.data.errors) {
-                setErrors(error.response.data.errors);
-            } else {
-                console.log(error);
-            }
+    }   catch (error) {
+        if (
+          error.response &&
+          error.response.data &&
+          error.response.data.errors
+        ) {
+          setErrors(error.response.data.errors);
+        } else {
+          console.log(error);
         }
+      }
     }
-
-    const renderError = (name: string) => {
-        if (errors[name]) {
-            return (
-                <Text style={styles.textError}>{errors[name][0]}</Text>
-            );
-        }
-        return null;
+  };
+  const renderError = (name: string) => {
+    if (errors[name]) {
+      return <Text style={styles.textError}>{errors[name]}</Text>;
     }
+    return null;
+  };
+    
 
     const abrirCamera = () => {
         const options = {
@@ -112,10 +147,9 @@ const Cliente: React.FC = () => {
             <TouchableOpacity style={styles.fotoButton} onPress={abrirCamera}>
             <Image source={require('../assets/images/userAdd.png')}
             style={styles.icon}/>
-                    {foto ? <Image source={{ uri: foto }} style={styles.fotoSelecionada} /> : null} 
-
+                    {foto ? <Image source={{ uri: foto }} style={styles.fotoSelecionada} /> : null}
             </TouchableOpacity>
-            {renderError('foto')}
+
             <TouchableOpacity style={styles.fotoButton} onPress={selecionarImagem}>
                     <Text style={styles.fotoButtonText}>selecionar imagem</Text>
                 </TouchableOpacity>
@@ -205,7 +239,7 @@ const Cliente: React.FC = () => {
             marginBottom: 15,
             paddingHorizontal: 4,
             borderRadius: 20,
-            marginTop: 5
+            marginTop: 15
         },
         input2: {
             backgroundColor: "white",
@@ -213,7 +247,8 @@ const Cliente: React.FC = () => {
             marginBottom: 10,
             paddingHorizontal: 10,
             borderRadius: 20,
-            marginTop: -1
+            marginTop: -4,
+            
         },
         fotoButton: {
             alignItems: 'center',
@@ -238,7 +273,8 @@ const Cliente: React.FC = () => {
             backgroundColor: 'red',
             padding: 10,
             borderRadius: 20,
-            alignItems: 'center'
+            alignItems: 'center',
+            marginTop: 20
         },
         buttonText: {
             color: 'white',
@@ -255,8 +291,9 @@ const Cliente: React.FC = () => {
         textError: {
             color: 'red',
             marginLeft: 15,
-            marginVertical: 10,
+            marginVertical: 2,
             fontSize: 15,
+            marginTop: -5
         },
     });
 
