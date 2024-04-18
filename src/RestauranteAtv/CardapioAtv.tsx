@@ -12,9 +12,10 @@ function CardapioAtv(): React.JSX.Element {
         async function fetchData() {
             try {
                 const response = await axios.get('http://10.137.11.213:8000/api/produtos/listagem');
-                setProduto(response.data);
-    
-                console.log(produto)
+              
+                if(true === response.data.status){
+                    setProduto(response.data.data)
+                }
             } catch (error) {
                 setErro("Ocorreu um erro");
                 console.log(error);
@@ -49,7 +50,7 @@ const renderItem = ({item}: {item: Produtos}) => (
         <ImageBackground source={require('../assets/images/fundo2.jpg')} 
         style={styles.ImageBackground}/>
         <FlatList showsVerticalScrollIndicator={false} data={produto} 
-        renderItem={renderItem} keyExtractor={(item) => item.id}/>
+        renderItem={renderItem}/>
         
         <View style={styles.footer}>
             <TouchableOpacity>
