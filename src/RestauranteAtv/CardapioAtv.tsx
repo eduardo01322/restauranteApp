@@ -27,10 +27,10 @@ function CardapioAtv(): React.JSX.Element {
         
 const renderItem = ({item}: {item: Produtos}) => (
         <View style={styles.itensCardapio}>
-            <View>
+        <TouchableOpacity>
         <Image source={require('../assets/images/NoImage.png')} style={styles.NoImages}/>
         <Image source={item.image} style={styles.images}/>
-        </View>
+        </TouchableOpacity>
         <Text style={styles.nameText}>{item.nome}</Text>
         <Text style={styles.itensText}>{item.ingredientes}</Text>
         <Text style={styles.precoText}>R$: {item.preco}</Text>
