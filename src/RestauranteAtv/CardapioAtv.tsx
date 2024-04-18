@@ -8,6 +8,7 @@ function CardapioAtv(): React.JSX.Element {
     const [produto, setProduto] = useState<Produtos[]>([]);
     const [erro, setErro] = useState<string>("");
     const [count, setCount] = useState(0)
+    
     useEffect(() => {
         async function fetchData() {
             try {
@@ -27,7 +28,9 @@ function CardapioAtv(): React.JSX.Element {
         
 const renderItem = ({item}: {item: Produtos}) => (
         <View style={styles.itensCardapio}>
+        <TouchableOpacity>
         <Image source={item.image} style={styles.images}/>
+        </TouchableOpacity>
         <Text style={styles.nameText}>{item.nome}</Text>
         <Text style={styles.itensText}>{item.ingredientes}</Text>
         <Text style={styles.precoText}>R$: {item.preco}</Text>
