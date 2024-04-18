@@ -11,7 +11,7 @@ function CardapioAtv(): React.JSX.Element {
     useEffect(() => {
         async function fetchData() {
             try {
-                const response = await axios.get('http://10.137.11.213:8000/api/produtos/listagem');
+                const response = await axios.get('http://10.137.11.213/api/produtos/listagem');
               
                 if(true === response.data.status){
                     setProduto(response.data.data)
@@ -27,10 +27,7 @@ function CardapioAtv(): React.JSX.Element {
         
 const renderItem = ({item}: {item: Produtos}) => (
         <View style={styles.itensCardapio}>
-        <View>
-        <Image source={require('../assets/images/NoImage.png')} style={styles.NoImages}/>
         <Image source={item.image} style={styles.images}/>
-        </View>
         <Text style={styles.nameText}>{item.nome}</Text>
         <Text style={styles.itensText}>{item.ingredientes}</Text>
         <Text style={styles.precoText}>R$: {item.preco}</Text>
@@ -53,8 +50,10 @@ const renderItem = ({item}: {item: Produtos}) => (
         </View>
         <ImageBackground source={require('../assets/images/fundo2.jpg')} 
         style={styles.ImageBackground}/>
+        
+        
         <FlatList showsVerticalScrollIndicator={false} data={produto} 
-        renderItem={renderItem}/>
+        renderItem={renderItem} keyExtractor={(produto) => produto.id}/>
         
         <View style={styles.footer}>
             <TouchableOpacity>
@@ -98,7 +97,7 @@ const styles = StyleSheet.create({
         marginHorizontal: 16,
         flexDirection: 'column',
         borderRadius: 20,
-        marginTop: -60
+    
     },
     ImageBackground: {
         flex: 1,
@@ -122,16 +121,9 @@ const styles = StyleSheet.create({
         width: 100,
         height: 100,
         marginRight: 'auto',
-        borderRadius: 20
-    },
-    NoImages: {
-        width: 100,
-        height: 100,
-        marginRight: 10,
         borderRadius: 20,
-        resizeMode: 'cover',
-        top: 80
     },
+    
     cartImage: {
         width: 45,
         height: 45,
