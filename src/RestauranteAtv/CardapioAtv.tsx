@@ -27,7 +27,10 @@ function CardapioAtv(): React.JSX.Element {
         
 const renderItem = ({item}: {item: Produtos}) => (
         <View style={styles.itensCardapio}>
+            <View>
+        <Image source={require('../assets/images/NoImage.png')} style={styles.NoImages}/>
         <Image source={item.image} style={styles.images}/>
+        </View>
         <Text style={styles.nameText}>{item.nome}</Text>
         <Text style={styles.itensText}>{item.ingredientes}</Text>
         <Text style={styles.precoText}>R$: {item.preco}</Text>
@@ -118,6 +121,14 @@ const styles = StyleSheet.create({
         height: 100,
         marginRight: 'auto',
         borderRadius: 20
+    },
+    NoImages: {
+        width: 100,
+        height: 100,
+        marginRight: 'auto',
+        borderRadius: 20,
+        resizeMode: 'cover',
+        top: 80
     },
     cartImage: {
         width: 45,
