@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Image, ImageBackground, ScrollView, StatusBar, StyleSheet, TouchableOpacity, View } from "react-native";
 import { launchCamera, launchImageLibrary } from "react-native-image-picker";
 import { Text, TextInput } from "react-native-paper";
+import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
 
 const Cliente: React.FC = () => {
@@ -128,7 +129,7 @@ const Cliente: React.FC = () => {
             }
         })
     }
-
+    const navigation = useNavigation();
     return (
         <View style={styles.container}>
             <ScrollView>
