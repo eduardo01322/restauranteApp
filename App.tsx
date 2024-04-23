@@ -6,21 +6,28 @@ import CadastroCliente from "./src/screens/LoginClientes";
 import Produto from "./src/RestauranteAtv/CadastroProdutoAtv";
 import Cliente from "./src/RestauranteAtv/CadastroClienteAtv";
 import CardapioAtv from "./src/RestauranteAtv/CardapioAtv";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
 
-function App(): React.JSX.Element {
+const Stack = createStackNavigator();
 
+function App(): React.ReactElement {
   return (
-    //<Cardapio/>
-    //<Carrinho/>
-    //<CadastroProduto/>
-    //<CadastroCliente/>
+    <NavigationContainer>
+      <Stack.Navigator>
 
-    //atividade 9/04/24:
-    //<Produto/>
-    //<Cliente/>
-    <CardapioAtv/>
+        <Stack.Screen name="Cardapio" component={CardapioAtv} 
+        options={{headerShown: false}} />
+
+        <Stack.Screen name="Produto" component={Produto} 
+        options={{headerShown: false}} />
+      </Stack.Navigator>
+
+      <Stack.Screen name="Cliente" component={Cliente} 
+        options={{headerShown: false}} />
+
+    </NavigationContainer>
   );
 }
-
-
+/*9/04*/
 export default App;

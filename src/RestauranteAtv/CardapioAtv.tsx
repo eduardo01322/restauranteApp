@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import {FlatList, Image, ImageBackground, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-
+import { useNavigation } from "@react-navigation/native";
 
 
 function CardapioAtv(): React.JSX.Element {
@@ -41,6 +41,8 @@ const renderItem = ({item}: {item: Produtos}) => (
 
 );
 
+    const navigation = useNavigation();
+    
     return (
         
       <View style={styles.container}>
@@ -69,7 +71,7 @@ const renderItem = ({item}: {item: Produtos}) => (
                 style={styles.footerIcon}/>
             </TouchableOpacity>
 
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate('Cliente')}>
                 <Image source={require('../assets/images/profile.png')}
                 style={styles.footerIcon}/>
             </TouchableOpacity>
